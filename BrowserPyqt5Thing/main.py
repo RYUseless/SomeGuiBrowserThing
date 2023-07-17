@@ -6,42 +6,31 @@ Resolution I am able to test window scaling etc on are: 4k, 1440p (13inch) and f
 -ryuseless
 """
 import sys
-from PyQt5.QtWidgets import QVBoxLayout,QMainWindow,QApplication,QLabel,QWidget
-from PyQt5.QtGui import QPixmap, QPalette
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QMenu
 
-class MainWindow(QWidget):
-    def __init__(self):
+
+class MainWindow(QMainWindow):
+    def __init__(self, parent=None):
         super(MainWindow, self).__init__()
-
-        self.initUI()
-
-    def initUI(self):
-        label1 = QLabel(self)
-
-
-
-        label1.setText("<font color=yellow>EPIC GUGL FROM WISH</font>")
-        label1.setAutoFillBackground(True)
-        palette = QPalette()
-        palette.setColor(QPalette.Window,Qt.red)
-        label1.setPalette(palette)
-        label1.setAlignment(Qt.AlignCenter)
-
-        vbox = QVBoxLayout()
-        vbox.addWidget(label1)
-        self.setLayout(vbox)
-
-        self.setWindowTitle('Gugl z wishe')
-
+        super().__init__(parent)
         self.resolutionHeight = QApplication.desktop().screenGeometry().height()
         self.resolutionWidth = QApplication.desktop().screenGeometry().width()
-
         appHeight = (int)(self.resolutionHeight * 0.5) #APPHEIGHT value
         appWidth = (int)(self.resolutionWidth * 0.5) #APPWIDTH value
-
+        self.setWindowTitle("Gugl from wish!")
         self.setGeometry(self.resolutionWidth // 2 - appWidth // 2, self.resolutionHeight // 2 - appHeight // 2, appWidth, appHeight)  #(xpos,ypos,width,height)
         self.showMaximized()
+        self._createMenuBar()
+
+    def _createMenuBar(self):
+        menuBar = self.menuBar()
+        # Creating menus using a QMenu object
+        fileMenu = QMenu("&File", self)
+        menuBar.addMenu(fileMenu)
+        # Creating menus using a title
+        editMenu = menuBar.addMenu("&Edit")
+        helpMenu = menuBar.addMenu("&Help")
 
 
 
