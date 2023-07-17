@@ -19,6 +19,8 @@ class MainWindow(QWidget):
     def initUI(self):
         label1 = QLabel(self)
 
+
+
         label1.setText("<font color=yellow>EPIC GUGL FROM WISH</font>")
         label1.setAutoFillBackground(True)
         palette = QPalette()
